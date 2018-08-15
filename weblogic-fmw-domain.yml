@@ -1,7 +1,9 @@
 ---
 - name: Configure Oracle Linux 7.1 with WebLogic 12c R2 domain
   hosts: weblogic
-  sudo: True
+  become: true
+  become_user: "root"
+  become_method: "sudo"
   vars_files:
     # User defined variables for infrastructure
     - infra-vars.yml
@@ -12,15 +14,15 @@
   roles:
     - role: linux-wls
     - role: linux-jdk
-    - role: fmw-software
-      sudo_user: '{{ oracle_user }}'
-    - role: fmw-domain
-      sudo_user: '{{ oracle_user }}'
-    - role: node-manager
-    - role: start-admin-server
-      sudo_user: '{{ oracle_user }}'
-    - role: fmw-managed-server
-      sudo_user: '{{ oracle_user }}'
+    # - role: fmw-software
+    #   sudo_user: '{{ oracle_user }}'
+    # - role: fmw-domain
+    #   sudo_user: '{{ oracle_user }}'
+    # - role: node-manager
+    # - role: start-admin-server
+    #   sudo_user: '{{ oracle_user }}'
+    # - role: fmw-managed-server
+    #   sudo_user: '{{ oracle_user }}'
   pre_tasks:
     # ==> Fix hosts file. Remove hostname from local loop. A workaround for
     # remove hostname to local loop

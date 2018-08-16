@@ -13,9 +13,10 @@
     - secrets.yml
   roles:
     #- role: linux-wls
-    - role: linux-jdk
-    # - role: fmw-software
-    #   sudo_user: '{{ oracle_user }}'
+    #- role: linux-jdk
+    - role: fmw-software
+      become: true
+      become_user: "{{ oracle_user }}"
     # - role: fmw-domain
     #   sudo_user: '{{ oracle_user }}'
     # - role: node-manager

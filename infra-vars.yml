@@ -9,7 +9,7 @@ jdk_installation_archive: 'jdk-8u66-linux-x64.tar.gz'
 jdk_folder: '{{ oracle_base }}/jdk1.8.0_66'
 
 # fmw installer
-mw_installer: 'fmw_12.2.1.0.0_infrastructure.jar'
+mw_installer: 'fmw_12.2.1.1.0_infrastructure.jar'
 
 # database settings for repository
 dbserver_name: '192.168.56.13'

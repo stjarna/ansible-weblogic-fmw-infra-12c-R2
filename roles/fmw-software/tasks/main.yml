@@ -1,17 +1,47 @@
 ################################################################################
-# ==> Tasks for install Oracle Fussion Middleware Infrastructure software 12c R2
-# ==> to an Oracle Linux 7.1 system. Supports version 12.2.1
-# ==> author: Christos Vezalis
-################################################################################
-
 # ==> Install Fussion Middleware Infrastructure Software
-- name: Create installer directory
-  file: state=directory path={{ mw_installer_folder }}
-- name: Copy Middleware Installer
-  copy: src={{ mw_installer }} dest={{ mw_installer_folder }}
-- name: Copy file for silent installation
-  template: src=silent-weblogic.txt dest={{ mw_installer_folder }}
-- name: Copy OraInst.loc
-  template: src=oraInst.loc dest={{ mw_installer_folder }}
-- name: execute Weblogic installer
-  command: "{{ jdk_folder }}/bin/java -Xms1024m -Xmx1024m -jar {{ mw_installer_folder }}/{{ mw_installer }} -silent -responseFile {{ mw_installer_folder }}/silent-weblogic.txt -invPtrLoc {{ mw_installer_folder }}/oraInst.loc"
+################################################################################
+- name: "Create installer directory"
+  file: 
+    state: "directory" 
+    path: "{{ mw_installer_folder }}"
+    owner: "{{ oracle_user }}" 
+    group: "{{ oracle_group }}"     
+- name: "Copy Middleware Installer"
+  copy: 
+    src: "{{ mw_installer }}"
+    dest: "{{ mw_installer_folder }}"
+  register: "copyWlsInstallerOutput"
+- name: "Debug - copyWlsInstallerOutput"
+  debug:
+    var: copyWlsInstallerOutput
+  tags: "debug"  
+- name: "Copy file for silent installation"
+  template: 
+    src: "silent-weblogic.txt" 
+    dest: "{{ mw_installer_folder }}"
+  register: "copyWlsSilentInstallFileOutput"
+- name: "Debug - copyWlsSilentInstallFileOutput"
+  debug:
+    var: copyWlsSilentInstallFileOutput
+  tags: "debug"    
+- name: "Copy OraInst.loc"
+  template: 
+    src: "oraInst.loc" 
+    dest: "{{ mw_installer_folder }}"
+  register: "oraInstOutput"  
+- name: "Debug - oraInstOutput"
+  debug:
+    var: oraInstOutput
+  tags: "debug"        
+- name: "execute Weblogic installer"
+  command: >- 
+    {{ jdk_folder }}/bin/java -Xms1024m -Xmx1024m 
+    -jar {{ mw_installer_folder }}/{{ mw_installer }} 
+    -silent -responseFile {{ mw_installer_folder }}/silent-weblogic.txt 
+    -invPtrLoc {{ mw_installer_folder }}/oraInst.loc
+  register: wlsInstallOutput  
+- name: "Debug - wlsInstallOutput"
+  debug:
+    var: wlsInstallOutput
+  tags: "debug"        

@@ -14,11 +14,12 @@
   roles:
     #- role: linux-wls
     #- role: linux-jdk
-    - role: fmw-software
+    # - role: fmw-software
+    #   become: true
+    #   become_user: "{{ oracle_user }}"
+    - role: fmw-domain
       become: true
       become_user: "{{ oracle_user }}"
-    # - role: fmw-domain
-    #   sudo_user: '{{ oracle_user }}'
     # - role: node-manager
     # - role: start-admin-server
     #   sudo_user: '{{ oracle_user }}'

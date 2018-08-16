@@ -43,23 +43,23 @@ addTemplate(em_template);
 #addTemplate(coherence_template);
 setOption('AppDir', domain_application_home);
 
-jdbcsystemresources = cmo.getJDBCSystemResources();
-for jdbcsystemresource in jdbcsystemresources:
-    cd ('/JDBCSystemResource/' + jdbcsystemresource.getName() + '/JdbcResource/' + jdbcsystemresource.getName() + '/JDBCConnectionPoolParams/NO_NAME_0');
-    cmo.setInitialCapacity(1);
-    cmo.setMaxCapacity(15);
-    cmo.setMinCapacity(1);
-    cmo.setStatementCacheSize(0);
-    cmo.setTestConnectionsOnReserve(java.lang.Boolean('false'));
-    cmo.setTestTableName(data_source_test);
-    cmo.setConnectionCreationRetryFrequencySeconds(30);
-    cd ('/JDBCSystemResource/' + jdbcsystemresource.getName() + '/JdbcResource/' + jdbcsystemresource.getName() + '/JDBCDriverParams/NO_NAME_0');
-    cmo.setUrl(data_source_url);
-    cmo.setPasswordEncrypted('{{ datasource_password }}');
+# jdbcsystemresources = cmo.getJDBCSystemResources();
+# for jdbcsystemresource in jdbcsystemresources:
+#     cd ('/JDBCSystemResource/' + jdbcsystemresource.getName() + '/JdbcResource/' + jdbcsystemresource.getName() + '/JDBCConnectionPoolParams/NO_NAME_0');
+#     cmo.setInitialCapacity(1);
+#     cmo.setMaxCapacity(15);
+#     cmo.setMinCapacity(1);
+#     cmo.setStatementCacheSize(0);
+#     cmo.setTestConnectionsOnReserve(java.lang.Boolean('false'));
+#     cmo.setTestTableName(data_source_test);
+#     cmo.setConnectionCreationRetryFrequencySeconds(30);
+#     cd ('/JDBCSystemResource/' + jdbcsystemresource.getName() + '/JdbcResource/' + jdbcsystemresource.getName() + '/JDBCDriverParams/NO_NAME_0');
+#     cmo.setUrl(data_source_url);
+#     cmo.setPasswordEncrypted('{{ datasource_password }}');
    
-    cd ('/JDBCSystemResource/' + jdbcsystemresource.getName() + '/JdbcResource/' + jdbcsystemresource.getName() + '/JDBCDriverParams/NO_NAME_0/Properties/NO_NAME_0/Property/user');
-    cmo.setValue(cmo.getValue().replace('DEV',data_source_user_prefix));
-    cd('/');
+#     cd ('/JDBCSystemResource/' + jdbcsystemresource.getName() + '/JdbcResource/' + jdbcsystemresource.getName() + '/JDBCDriverParams/NO_NAME_0/Properties/NO_NAME_0/Property/user');
+#     cmo.setValue(cmo.getValue().replace('DEV',data_source_user_prefix));
+#     cd('/');
 
 cd("/SecurityConfiguration/" + domain_name);
 cmo.setNodeManagerUsername('{{ nodemanager_username }}');

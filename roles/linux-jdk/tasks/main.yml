@@ -16,7 +16,7 @@
   tags: "debug" 
   # unarchive module could not find the file, using command tar instead
 - name: "Extract JDK archive"
-  command: "tar -xf ~/{{ jdk_installation_archive }} -C {{ oracle_base }}"
+  command: "tar -xf /tmp/{{ jdk_installation_archive }} -C {{ oracle_base }}"
   args:
     creates: "{{ jdk_folder }}"
     warn: false  

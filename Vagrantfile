@@ -6,8 +6,8 @@ Vagrant.configure(2) do |config|
   config.vm.network "forwarded_port", guest: 22, host: 2022 
   
   config.vm.provider "virtualbox" do |vb|  
-    vb.memory = "4096"
-    vb.cpus = 2
+    vb.memory = "8192"
+    vb.cpus = 16
     vb.name = "Weblogic12cR2-1"
   end
 

@@ -11,7 +11,9 @@
   copy: 
     src: "{{ wls_installation_archive }}"
     dest: "{{ wls_installer_folder }}"
-  register: "copyWlsInstallerOutput"
+    owner: "{{ oracle_user}}" 
+    group: "{{ oracle_group }}" 
+  register: "copyWlsInstallerOutput"  
 - name: "Debug - copyWlsInstallerOutput"
   debug:
     var: copyWlsInstallerOutput
@@ -40,6 +42,8 @@
     -jar {{ wls_installer_folder }}/{{ wls_installation_archive }} 
     -silent -responseFile {{ wls_installer_folder }}/silent-weblogic.txt 
     -invPtrLoc {{ wls_installer_folder }}/oraInst.loc
+  become: true
+  become_user: "{{ oracle_user}}"    
   register: wlsInstallOutput  
 - name: "Debug - wlsInstallOutput"
   debug:

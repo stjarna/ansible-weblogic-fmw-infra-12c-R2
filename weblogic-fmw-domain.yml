@@ -11,8 +11,6 @@
     - role: prepare-wls-env
     - role: install-jdk
     - role: install-wls
-      become: true
-      become_user: "{{ oracle_user}}"
     - role: create-domain
       become: true
       become_user: "{{ oracle_user}}"    

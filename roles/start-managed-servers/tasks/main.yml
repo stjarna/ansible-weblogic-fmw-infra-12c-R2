@@ -1,0 +1,19 @@
+---
+- name: "Copy Start Managed Server Script"
+  template: 
+    src: "start-managed-server.py" 
+    dest: "{{ wls_installer_folder }}"
+- name: "Start Managed Server"
+  shell: "{{ weblogic_home }}/common/bin/wlst.sh {{ wls_installer_folder }}/start-managed-server.py"
+  register: "startManagedNodeOutput"
+- name: "Debug - startManagedNodeOutput"
+  debug:
+    var: startManagedNodeOutput 
+  tags: "debug"  
+# TODO check on all managed node servers
+# - name: "Wait for Managed Server to startup" 
+#   wait_for: 
+#     host: "{{ server_hostname }}" 
+#     port: "{{ managed_server_port }}" 
+#     delay: 2 
+#     timeout: 30

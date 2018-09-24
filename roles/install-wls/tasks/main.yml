@@ -1,0 +1,47 @@
+################################################################################
+# ==> Install Fusion Middleware Infrastructure Software
+################################################################################
+- name: "Create installer directory"
+  file: 
+    state: "directory" 
+    path: "{{ wls_installer_folder }}"
+    owner: "{{ oracle_user}}" 
+    group: "{{ oracle_group }}"     
+- name: "Copy Middleware Installer"
+  copy: 
+    src: "{{ wls_installation_archive }}"
+    dest: "{{ wls_installer_folder }}"
+  register: "copyWlsInstallerOutput"
+- name: "Debug - copyWlsInstallerOutput"
+  debug:
+    var: copyWlsInstallerOutput
+  tags: "debug"  
+- name: "Copy file for silent installation"
+  template: 
+    src: "silent-weblogic.txt" 
+    dest: "{{ wls_installer_folder }}"
+  register: "copyWlsSilentInstallFileOutput"
+- name: "Debug - copyWlsSilentInstallFileOutput"
+  debug:
+    var: copyWlsSilentInstallFileOutput
+  tags: "debug"    
+- name: "Copy OraInst.loc"
+  template: 
+    src: "oraInst.loc" 
+    dest: "{{ wls_installer_folder }}"
+  register: "oraInstOutput"  
+- name: "Debug - oraInstOutput"
+  debug:
+    var: oraInstOutput
+  tags: "debug"        
+- name: "execute Weblogic installer"
+  command: >- 
+    {{ jdk_folder }}/bin/java -Xms1024m -Xmx1024m 
+    -jar {{ wls_installer_folder }}/{{ wls_installation_archive }} 
+    -silent -responseFile {{ wls_installer_folder }}/silent-weblogic.txt 
+    -invPtrLoc {{ wls_installer_folder }}/oraInst.loc
+  register: wlsInstallOutput  
+- name: "Debug - wlsInstallOutput"
+  debug:
+    var: wlsInstallOutput
+  tags: "debug"        

@@ -1,0 +1,33 @@
+##############################################
+# Creates a domain 
+##############################################
+- name: "Prepare domain properties"
+  template: 
+    src: "domain.properties" 
+    dest: "{{ wls_installer_folder }}"
+    owner: "{{ oracle_user}}"
+    group: "{{ oracle_group }}"   
+- name: "Copy create domain python script"
+  copy: 
+    src: "create-domain.py" 
+    dest: "{{ wls_installer_folder }}" 
+    owner: "{{ oracle_user}}" 
+    group: "{{ oracle_group }}"
+- name: "Execute create domain script"
+  debug:
+    msg: "Going to create a domain in {{ applications_home }}/{{ domain_name}}"   
+- name: "Execute create domain script"
+  shell: "{{ weblogic_home }}/common/bin/wlst.sh {{ wls_installer_folder }}/create-domain.py"
+  register: "createDomainOutput"  
+- name: "Debug - createDomainOutput"
+  debug:
+    var: createDomainOutput
+  tags: "debug"  
+- name: "Creates new .bashrc file with system variables"
+  template: 
+    src: ".bashrc" 
+    dest: "/home/oracle/.bashrc"
+- name: "Add Oracle Home environment variables"
+  lineinfile: 
+    dest: "/home/{{ oracle_user}}/.bashrc" 
+    line: "export ORACLE_HOME={{ middleware_home }}"

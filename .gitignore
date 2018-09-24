@@ -1,5 +1,5 @@
-roles/linux-jdk/files/jdk-8u66-linux-x64.tar.gz
-roles/fmw-software/files/fmw_12.2.1.1.0_infrastructure.jar
+**/files/jdk-8u66-linux-x64.tar.gz
+**/fmw_12.2.1.1.0_infrastructure.jar
 .vagrant
 .idea
 .gitignore

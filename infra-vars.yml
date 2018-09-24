@@ -1,29 +1,31 @@
-# Oracle os user and group
 oracle_user: 'oracle'
-oracle_group: 'oinstall'
-# Software and configuration main directory
+oracle_os_user_pass: 'oracle'
+oracle_group: 'orainstall'
 oracle_base: '/oracle/fmw12.2.1'
-
-# JDK installer and target folder
 jdk_installation_archive: 'jdk-8u66-linux-x64.tar.gz'
 jdk_folder: '{{ oracle_base }}/jdk1.8.0_66'
-
-# fmw installer
-mw_installer: 'fmw_12.2.1.1.0_infrastructure.jar'
-
-# database settings for repository
-dbserver_name: '192.168.56.13'
-dbserver_port: '1521'
-dbserver_service: 'db.oradb3.private'
-repository_prefix: 'wls12c2'
-
-# Domain Name
-domain_name: 'adf_domain'
+wls_installation_archive: 'fmw_12.2.1.1.0_infrastructure.jar'
 
 # Nodemanager and server settings
-node_manager_listen_port: '5556'
-node_manager_listen_address: 'localhost'
-admin_server_hostname: 'localhost'
+domain_name: 'hcus_domain'
+node_manager_listen_port: 5556
+node_manager_listen_address: '192.168.56.14'
+admin_server_hostname: '192.168.56.14'
 admin_server_port: '7001'
-managed_server_name: 'adfsrv1'
-managed_server_port: '7003'
+
+# Admin and managed servers
+ms_name_base: 'ms'
+ms_port_base: 710
+ms_count: 2
+admin_ip_public: '192.168.56.14'
+vm1_ip_public: '192.168.56.14'
+vm1_ip_private: '192.168.56.14'
+vm2_ip_public: '192.168.56.14'
+vm2_ip_private: '192.168.56.14'
+ms1_port_public: 8001
+ms1_port_private: 9001
+ms2_port_public: 8002
+ms2_port_private: 9002
+
+# Cluster name
+cluster_name: 'cluster-1'

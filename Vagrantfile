@@ -7,13 +7,7 @@ Vagrant.configure(2) do |config|
   
   config.vm.provider "virtualbox" do |vb|  
     vb.memory = "8192"
-    vb.cpus = 16
+    vb.cpus = 4
     vb.name = "Weblogic12cR2-1"
   end
-
-#  config.vm.provision "ansible" do |ansible|
-#    ansible.playbook = "weblogic-fmw-domain.yml"
-#    ansible.inventory_path = "./hosts"
-#    ansible.limit = 'all'
-#  end
 end

@@ -5,7 +5,7 @@
   file: 
     state: "directory"
     path: "{{ domains_home }}/{{ domain_name }}/servers/{{ admin_server_name }}/security"
-    owner: "{{ oracle_user }}"
+    owner: "{{ oracle_user}}"
     group: "{{ oracle_group }}"
   tags:
     - "start-admin-server"
@@ -13,23 +13,23 @@
   template: 
     src: "boot.properties" 
     dest: "{{ domains_home }}/{{ domain_name }}/servers/{{ admin_server_name }}/security/"
-    owner: "{{ oracle_user }}"
+    owner: "{{ oracle_user}}"
     group: "{{ oracle_group }}"
   tags:
     - "start-admin-server"
 - name: "Copy Admin Server start-up script"
   template: 
     src: "start-admin-server.py" 
-    dest: "{{ mw_installer_folder }}"
-    owner: "{{ oracle_user }}" 
+    dest: "{{ wls_installer_folder }}"
+    owner: "{{ oracle_user}}" 
     group: "{{ oracle_group }}" 
     mode: "0755"
   tags:
     - "start-admin-server"
 - name: "Execute start Admin Server script"
-  shell: "{{ weblogic_home }}/common/bin/wlst.sh {{ mw_installer_folder }}/start-admin-server.py"
+  shell: "{{ weblogic_home }}/common/bin/wlst.sh {{ wls_installer_folder }}/start-admin-server.py"
   become: true
-  become_user: "{{ oracle_user }}"  
+  become_user: "{{ oracle_user}}"  
   tags:
      - "start-admin-server"
   register: "startAdminServerOutput"   
@@ -39,6 +39,7 @@
   tags: "debug"  
 - name: "Wait for Admin Server to startup"
   wait_for: 
+    host: "{{ admin_server_hostname }}" 
     port: "{{ admin_server_port }}"
     delay: 2 
     timeout: 60

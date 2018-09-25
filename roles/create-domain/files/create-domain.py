@@ -106,7 +106,7 @@ def createManagedServers():
 
     var_machine_name = 'm' + str(n)
     var_ms_name = var_ms_name_base + '-' + str(n)
-    var_ms_listen_port = getProperty(var_ms_name +'.port.public')
+    var_ms_listen_port = int(var_ms_port_base + str(n))
     var_ms_listen_address = getProperty('vm' + str(n) + '.ip.public')
     var_vm_pub_ip = getProperty('vm' + str(n) +'.ip.public')
     var_vm_pri_ip = getProperty('vm' + str(n) +'.ip.private')
@@ -135,10 +135,6 @@ def createManagedServers():
 #####################################################################################################################
 
 myProps = loadMyProperties('/oracle/fmw12.2.1/installer/domain.properties')
-
-loadProperties('/oracle/fmw12.2.1/installer/domain.properties')
-
-# JW: I fully accept that global variables are lazy but this is a work in progress :)
 
 var_domains_dir = getProperty('user.projects.path') + '/'
 var_domain_name = getProperty('domain.name')

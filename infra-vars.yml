@@ -22,10 +22,6 @@ vm1_ip_public: '192.168.56.14'
 vm1_ip_private: '192.168.56.14'
 vm2_ip_public: '192.168.56.14'
 vm2_ip_private: '192.168.56.14'
-ms1_port_public: 8001
-ms1_port_private: 9001
-ms2_port_public: 8002
-ms2_port_private: 9002
 
 # Cluster name
 cluster_name: 'cluster-1'

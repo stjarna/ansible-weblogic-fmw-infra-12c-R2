@@ -1,8 +1,4 @@
-################################################################################
-# ==> tasks for linux-jdk Role that installs JDK in an CentOS system
-################################################################################
-
-# ==> Install JDK
+---
 - name: "Copy jdk archive to host"
   copy: 
     src: "{{ jdk_installation_archive }}"

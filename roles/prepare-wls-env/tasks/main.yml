@@ -1,8 +1,4 @@
-################################################################################
-# ==> Tasks for linux-wls Role that configure CentOS system with
-# ==> requirements for Fusion Middleware infrastructrure installation.
-# ==> Supports version 12.2.1
-################################################################################
+---
 - name: "Install required libraries"
   yum: 
     name: "{{ item }}" 
@@ -42,13 +38,13 @@
     var: "createOracleUserOutput"
   tags: "debug"    
 
-# ==> Add open file and process limits for oracle user
+# Add open file and process limits for oracle user
 - name: "Create a shell profile with file and process limits for oracle user"
   template: 
     src: "oracle-limits.sh" 
     dest: "/etc/profile.d/"
 
-# ==> Add limits for oracle user
+# Add limits for oracle user
 - name: "Add oracle user limits"
   lineinfile: 
     dest: "/etc/security/limits.conf"
@@ -59,7 +55,7 @@
     - { limit: 'soft', type: nproc, value: '{{ soft_nproc }}' }
     - { limit: 'hard', type: nproc, value: '{{ hard_nproc }}' }
 
-# ==> Create Base Directories
+# Create Base Directories
 - name: "Create Oracle Home directory"
   file: 
     state: "directory" 
@@ -93,3 +89,40 @@
   debug:
     var: "createApplicationHomeDirectoryOutput"
   tags: "debug"      
+
+# Prepare Wls Installer
+- name: "Create installer directory"
+  file: 
+    state: "directory" 
+    path: "{{ wls_installer_folder }}"
+    owner: "{{ oracle_user}}" 
+    group: "{{ oracle_group }}"     
+- name: "Copy Middleware Installer"
+  copy: 
+    src: "{{ wls_installation_archive }}"
+    dest: "{{ wls_installer_folder }}"
+    owner: "{{ oracle_user}}" 
+    group: "{{ oracle_group }}" 
+  register: "copyWlsInstallerOutput"  
+- name: "Debug - copyWlsInstallerOutput"
+  debug:
+    var: copyWlsInstallerOutput
+  tags: "debug"  
+- name: "Copy file for silent installation"
+  template: 
+    src: "silent-weblogic.txt" 
+    dest: "{{ wls_installer_folder }}"
+  register: "copyWlsSilentInstallFileOutput"
+- name: "Debug - copyWlsSilentInstallFileOutput"
+  debug:
+    var: copyWlsSilentInstallFileOutput
+  tags: "debug"    
+- name: "Copy OraInst.loc"
+  template: 
+    src: "oraInst.loc" 
+    dest: "{{ wls_installer_folder }}"
+  register: "oraInstOutput"  
+- name: "Debug - oraInstOutput"
+  debug:
+    var: oraInstOutput
+  tags: "debug"    

@@ -1,5 +1,5 @@
 ---
-- name: Configure Oracle Linux 7.1 with WebLogic 12c R2 domain
+- name: Configure Centos/7 with WebLogic 12c R2 domain
   hosts: weblogic
   become: true
   become_user: "root"
@@ -11,12 +11,12 @@
     - role: prepare-wls-env
     - role: install-jdk
     - role: install-wls
+      become: true
+      become_user: "{{ oracle_user}}"        
     - role: create-domain
       become: true
       become_user: "{{ oracle_user}}"    
-    - role: setup-node-manager
-      become: true 
-      become_user: "root"       
+    - role: setup-node-manager   
     - role: start-admin-server
       become: true
       become_user: "{{ oracle_user}}"

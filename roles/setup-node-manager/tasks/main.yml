@@ -1,6 +1,4 @@
-# ######################################################################
-# Ansible role that configures, starts and sets up WLS node manger 
-# ######################################################################
+---
 - name: "Copy Nodemanager Properties file"
   template: 
     src: "nodemanager.properties"

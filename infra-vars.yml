@@ -2,8 +2,8 @@ oracle_user: 'oracle'
 oracle_os_user_pass: 'oracle'
 oracle_group: 'orainstall'
 oracle_base: '/oracle/fmw12.2.1'
-jdk_installation_archive: 'jdk-8u66-linux-x64.tar.gz'
-jdk_folder: '{{ oracle_base }}/jdk1.8.0_66'
+jdk_installation_archive: 'jdk-8u181-linux-x64.tar.gz'
+jdk_folder: '{{ oracle_base }}/jdk1.8.0_181'
 wls_installation_archive: 'fmw_12.2.1.1.0_infrastructure.jar'
 
 # Nodemanager and server settings

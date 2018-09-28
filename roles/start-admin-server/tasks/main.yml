@@ -1,6 +1,4 @@
-# ##############################################################################
-# ==> Ansible Role for start Admin Server for the first time in a configured
-# ##############################################################################
+---
 - name: "Create security folder on Admin Server"
   file: 
     state: "directory"
@@ -28,8 +26,6 @@
     - "start-admin-server"
 - name: "Execute start Admin Server script"
   shell: "{{ weblogic_home }}/common/bin/wlst.sh {{ wls_installer_folder }}/start-admin-server.py"
-  become: true
-  become_user: "{{ oracle_user}}"  
   tags:
      - "start-admin-server"
   register: "startAdminServerOutput"   

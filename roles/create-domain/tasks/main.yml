@@ -1,6 +1,4 @@
-##############################################
-# Creates a domain 
-##############################################
+---
 - name: "Prepare domain properties"
   template: 
     src: "domain.properties" 

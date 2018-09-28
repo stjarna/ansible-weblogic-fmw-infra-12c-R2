@@ -1,7 +1,6 @@
-**/jdk-8u66-linux-x64.tar.gz
-**/fmw_12.2.1.1.0_infrastructure.jar
+**/*.tar.gz
+**/*.jar
 .vagrant
-.idea
 .gitignore
 *.retry
 *.swp

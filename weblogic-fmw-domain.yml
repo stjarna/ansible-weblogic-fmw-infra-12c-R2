@@ -8,6 +8,7 @@
     - infra-vars.yml
     - wls-vars.yml
   roles:
+    - role: find-number-of-wls-managed-nodes
     - role: prepare-wls-env
     - role: install-jdk
     - role: install-wls

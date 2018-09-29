@@ -51,7 +51,7 @@ This files contains infra related variables. It covers things such as OS Oracle 
 
 If you need to change IP addresses/ports of node manager, admin server or managed nodes, this file is the right place.
 
-If you need to reduce/increase the number of managed nodes, you have to remove vmN_ip_(public|private) properties. Besides that, you have to amend accordingly also *ms_count* property.  
+If you need to reduce/increase the number of managed nodes, you have to remove vmN_ip_(public|private) properties.  
 
 ### wls-vars.yml
 This files aims at Weblogic username/password, wls/domain/app related folders.

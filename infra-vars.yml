@@ -16,7 +16,6 @@ admin_server_port: '7001'
 # Admin and managed servers
 ms_name_base: 'ms'
 ms_port_base: 710
-ms_count: 2
 admin_ip_public: '192.168.56.14'
 vm1_ip_public: '192.168.56.14'
 vm1_ip_private: '192.168.56.14'

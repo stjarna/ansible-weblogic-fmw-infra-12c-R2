@@ -1,0 +1,13 @@
+---
+# Find number of declared WLS managed nodes from defined infra variables (vmN_ip_public)
+- name: "Find out number of managed nodes"
+  set_fact:
+    result: "{{ result }} + [ {{ item }} ]"
+  when: "{{ item.key | regex_search('^vm.*_ip_public$') }}"      
+  with_dict: "{{ vars }}"
+- name: "Set number of discovered WLS managed nodes to variable"  
+  set_fact:
+    ms_count: "{{ result | length }}"
+- name: "Debug - discovered number of defined WLS manages nodes"  
+  debug:
+    var: ms_count
